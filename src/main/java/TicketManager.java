@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     private TicketInfo repository;
@@ -11,7 +12,7 @@ public class TicketManager {
         this.repository.save(ticket);
     }
 
-    public Ticket[] findAll(String from, String to) {
+    public Ticket[] findAll(String from, String to, Comparator<Ticket> comparator) {
         Ticket[] ans = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
             if (ticket.getArival() == to && ticket.getFlight() == from) {
@@ -23,7 +24,7 @@ public class TicketManager {
                 ans = tmp;
             }
         }
-        Arrays.sort(ans);
+        Arrays.sort(ans, comparator);
         return ans;
     }
 }
